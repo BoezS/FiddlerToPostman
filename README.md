@@ -1,7 +1,7 @@
 # FiddlerToPostman
 Export captured Fiddler sessions as a Postman collection
 
-Steps to add Postman-Colection export format to fiddler:
+# Steps to add Postman-Collection export format to fiddler:
 
 1) Copy the FiddlerToPostman.dll from the %yourRoot%\FiddlerToPostman\FiddlerToPostman\bin\Release directory.
 
