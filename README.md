@@ -19,6 +19,6 @@ Steps to add Postman-Colection export format to fiddler:
 
 7) If Fiddler is currently open, close the application.
 
-8) Start Fiddler and the Postman-Colection export format will be under File -> Export Sessions -> All Sessions / Selected Sessions.
+8) Start Fiddler and the Postman-Collection export format will be under File -> Export Sessions -> All Sessions / Selected Sessions.
 
-9) Postman-Colection will be an export format option in the dropdown menu.
+9) Postman-Collection will be an export format option in the dropdown menu.
