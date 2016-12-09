@@ -58,25 +58,67 @@ namespace FiddlerToPostman
                         addedSessions++;
                         if (session != null)
                         {
-                            Request r = new Request();
-                            r.id = Guid.NewGuid().ToString();
-                            r.collectionId = postmanCollection.id;
-                            r.method = session.RequestMethod;
-                            r.url = session.fullUrl;
-                            r.name = session.fullUrl;
-                            r.currentHelper = "normal";
-                            r.dataMode = "raw";
-                            r.rawModeData = Encoding.Default.GetString(session.RequestBody);
-                            r.time = DateTime.UtcNow.Ticks;
-                            r.headers = "";
+                            Request request = new Request();
+                            request.id = Guid.NewGuid().ToString();
+                            request.collectionId = postmanCollection.id;
+                            request.method = session.RequestMethod;
+                            request.url = session.fullUrl;
+                            request.name = session.fullUrl;
+                            request.currentHelper = "normal";
+                            request.dataMode = "raw";
+                            request.rawModeData = Encoding.Default.GetString(session.RequestBody);
+                            request.time = DateTime.UtcNow.Ticks;
+                            request.responses = new List<Response>();
+                            request.headers = "";
+
+                            List<RequestHeaderInfo> requestHeaderInfoList = new List<RequestHeaderInfo>();
 
                             foreach (HTTPHeaderItem httphi in session.RequestHeaders)
                             {
-                                r.headers += string.Format("{0}: {1}\n", httphi.Name, httphi.Value);
+                                request.headers += string.Format("{0}: {1}\n", httphi.Name, httphi.Value);
+
+                                requestHeaderInfoList.Add(new RequestHeaderInfo() { key = httphi.Name, value = httphi.Value, enabled = true });
                             }
 
-                            postmanCollection.requests.Add(r);
-                            postmanCollection.order.Add(r.id);
+                            Response response = new Response();
+                            response.responseCode = new ResponseCodeInfo()
+                            {
+                                code = session.responseCode
+                            };
+                            response.headers = new List<ResponseHeaderInfo>();
+                            response.text = Encoding.Default.GetString(session.ResponseBody);
+                            response.language = "json";
+                            response.rawDataType = "text";
+                            response.previewType = "text";
+                            response.searchResultScrolledTo = -1;
+                            response.forceNoPretty = false;
+                            response.write = true;
+                            response.empty = false;
+                            response.failed = false;
+                            response.state = new ResponseState()
+                            {
+                                size = "normal"
+                            };
+                            response.id = Guid.NewGuid().ToString();
+                            response.name = "response";
+                            response.request = new RequestInfo()
+                            {
+                                url = session.fullUrl,
+                                headers = requestHeaderInfoList,
+                                data = "",
+                                method = session.RequestMethod,
+                                dataMode = "raw"
+                            };
+
+                            foreach (HTTPHeaderItem httphi in session.ResponseHeaders)
+                            {
+                                response.headers.Add(new ResponseHeaderInfo() { name = httphi.Name, key = httphi.Name, value = httphi.Value, description = httphi.Name });
+                            }
+
+                            request.responses.Add(response);
+
+                            postmanCollection.requests.Add(request);
+                            postmanCollection.order.Add(request.id);
                         }
                         if (evtProgressNotifications != null)
                         {
