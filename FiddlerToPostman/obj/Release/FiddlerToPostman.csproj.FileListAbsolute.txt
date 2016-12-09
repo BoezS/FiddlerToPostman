@@ -12,3 +12,17 @@ C:\Users\arosenberger\Documents\Visual Studio 2012\Projects\FiddlerToPostman\Fid
 C:\Users\arosenberger\Documents\Visual Studio 2012\Projects\FiddlerToPostman\FiddlerToPostman\obj\Release\FiddlerToPostman.csprojResolveAssemblyReference.cache
 C:\Users\arosenberger\Documents\Visual Studio 2012\Projects\FiddlerToPostman\FiddlerToPostman\obj\Release\FiddlerToPostman.dll
 C:\Users\arosenberger\Documents\Visual Studio 2012\Projects\FiddlerToPostman\FiddlerToPostman\obj\Release\FiddlerToPostman.pdb
+C:\Users\arosenberger\Documents\GitHub\FiddlerToPostman\FiddlerToPostman\bin\Release\FiddlerToPostman.dll
+C:\Users\arosenberger\Documents\GitHub\FiddlerToPostman\FiddlerToPostman\bin\Release\FiddlerToPostman.pdb
+C:\Users\arosenberger\Documents\GitHub\FiddlerToPostman\FiddlerToPostman\bin\Release\Fiddler.exe
+C:\Users\arosenberger\Documents\GitHub\FiddlerToPostman\FiddlerToPostman\bin\Release\Newtonsoft.Json.dll
+C:\Users\arosenberger\Documents\GitHub\FiddlerToPostman\FiddlerToPostman\bin\Release\Xceed.Zip.dll
+C:\Users\arosenberger\Documents\GitHub\FiddlerToPostman\FiddlerToPostman\bin\Release\Xceed.FileSystem.dll
+C:\Users\arosenberger\Documents\GitHub\FiddlerToPostman\FiddlerToPostman\bin\Release\Telerik.Analytics.dll
+C:\Users\arosenberger\Documents\GitHub\FiddlerToPostman\FiddlerToPostman\bin\Release\Xceed.Compression.Formats.dll
+C:\Users\arosenberger\Documents\GitHub\FiddlerToPostman\FiddlerToPostman\bin\Release\Xceed.Compression.dll
+C:\Users\arosenberger\Documents\GitHub\FiddlerToPostman\FiddlerToPostman\bin\Release\Fiddler.pdb
+C:\Users\arosenberger\Documents\GitHub\FiddlerToPostman\FiddlerToPostman\bin\Release\Newtonsoft.Json.xml
+C:\Users\arosenberger\Documents\GitHub\FiddlerToPostman\FiddlerToPostman\obj\Release\FiddlerToPostman.csprojResolveAssemblyReference.cache
+C:\Users\arosenberger\Documents\GitHub\FiddlerToPostman\FiddlerToPostman\obj\Release\FiddlerToPostman.dll
+C:\Users\arosenberger\Documents\GitHub\FiddlerToPostman\FiddlerToPostman\obj\Release\FiddlerToPostman.pdb
