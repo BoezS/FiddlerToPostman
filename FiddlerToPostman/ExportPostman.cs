@@ -1,5 +1,4 @@
 ﻿using Fiddler;
-using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -41,24 +40,27 @@ namespace FiddlerToPostman
             {
                 using (StreamWriter sw = new StreamWriter(filename, false, Encoding.UTF8))
                 {
+                    Request request = new Request();
+                    Response response = new Response();
+                    List<string> order = new List<string>();
+                    List<Request> requests = new List<Request>();
+                    List<Response> responses = new List<Response>();
+                    List<ResponseHeaderInfo> responseHeaderInfos = new List<ResponseHeaderInfo>();
                     int addedSessions = 0;
                     int numSessions = oSessions.Length;
 
                     PostmanCollection postmanCollection = new PostmanCollection();
                     postmanCollection.id = Guid.NewGuid().ToString();
                     postmanCollection.name = string.Format("Collection_{0}", DateTime.Now.ToString("yyyy-MM-ddThh:mm:ss"));
-                    postmanCollection.order = new List<string>();
                     postmanCollection.timestamp = DateTime.UtcNow.Ticks;
                     postmanCollection.owner = 0;
                     postmanCollection.__public = false;
-                    postmanCollection.requests = new List<Request>();
 
                     foreach (Session session in oSessions)
                     {
                         addedSessions++;
                         if (session != null)
                         {
-                            Request request = new Request();
                             request.id = Guid.NewGuid().ToString();
                             request.collectionId = postmanCollection.id;
                             request.method = session.RequestMethod;
@@ -68,7 +70,6 @@ namespace FiddlerToPostman
                             request.dataMode = "raw";
                             request.rawModeData = Encoding.Default.GetString(session.RequestBody);
                             request.time = DateTime.UtcNow.Ticks;
-                            request.responses = new List<Response>();
                             request.headers = "";
 
                             List<RequestHeaderInfo> requestHeaderInfoList = new List<RequestHeaderInfo>();
@@ -80,12 +81,10 @@ namespace FiddlerToPostman
                                 requestHeaderInfoList.Add(new RequestHeaderInfo() { key = httphi.Name, value = httphi.Value, enabled = true });
                             }
 
-                            Response response = new Response();
                             response.responseCode = new ResponseCodeInfo()
                             {
                                 code = session.responseCode
                             };
-                            response.headers = new List<ResponseHeaderInfo>();
                             response.text = Encoding.Default.GetString(session.ResponseBody);
                             response.language = "json";
                             response.rawDataType = "text";
@@ -104,7 +103,7 @@ namespace FiddlerToPostman
                             response.request = new RequestInfo()
                             {
                                 url = session.fullUrl,
-                                headers = requestHeaderInfoList,
+                                headers = requestHeaderInfoList.ToArray(),
                                 data = "",
                                 method = session.RequestMethod,
                                 dataMode = "raw"
@@ -112,13 +111,16 @@ namespace FiddlerToPostman
 
                             foreach (HTTPHeaderItem httphi in session.ResponseHeaders)
                             {
-                                response.headers.Add(new ResponseHeaderInfo() { name = httphi.Name, key = httphi.Name, value = httphi.Value, description = httphi.Name });
+                                responseHeaderInfos.Add(new ResponseHeaderInfo() { name = httphi.Name, key = httphi.Name, value = httphi.Value, description = httphi.Name });
                             }
 
-                            request.responses.Add(response);
+                            responses.Add(response);
+                            request.responses = responses.ToArray();
+                            response = new Response();
 
-                            postmanCollection.requests.Add(request);
-                            postmanCollection.order.Add(request.id);
+                            requests.Add(request);
+                            order.Add(request.id);
+                            request = new Request();
                         }
                         if (evtProgressNotifications != null)
                         {
@@ -132,9 +134,10 @@ namespace FiddlerToPostman
                         }
                     }
 
-                    JsonSerializerSettings jss = new JsonSerializerSettings() { NullValueHandling = NullValueHandling.Ignore };
+                    postmanCollection.requests = requests.ToArray();
+                    postmanCollection.order = order.ToArray();
 
-                    sw.Write(JsonConvert.SerializeObject(postmanCollection).Replace("__", ""));
+                    sw.Write(Utilities.ToJSONString(postmanCollection).Replace("__", ""));
                     sw.Close();
                 }
 

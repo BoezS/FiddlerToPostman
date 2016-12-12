@@ -10,7 +10,7 @@ namespace FiddlerToPostman
 
         public string name { get; set; }
 
-        public List<string> order { get; set; }
+        public string[] order { get; set; }
 
         public long timestamp { get; set; }
 
@@ -18,7 +18,7 @@ namespace FiddlerToPostman
 
         public bool __public { get; set; }
 
-        public List<Request> requests { get; set; }
+        public Request[] requests { get; set; }
     }
 
     public class Request
@@ -41,7 +41,7 @@ namespace FiddlerToPostman
 
         public string collectionId { get; set; }
 
-        public List<Response> responses { get; set; }
+        public Response[] responses { get; set; }
 
         public string rawModeData { get; set; }
     }
@@ -50,7 +50,7 @@ namespace FiddlerToPostman
     {
         public string url { get; set; }
 
-        public List<RequestHeaderInfo> headers { get; set; }
+        public RequestHeaderInfo[] headers { get; set; }
 
         public string data { get; set; }
 
@@ -72,7 +72,7 @@ namespace FiddlerToPostman
     {
         public ResponseCodeInfo responseCode { get; set; }
 
-        public List<ResponseHeaderInfo> headers { get; set; }
+        public ResponseHeaderInfo[] headers { get; set; }
 
         public string text { get; set; }
 
