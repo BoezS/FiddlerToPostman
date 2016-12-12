@@ -76,7 +76,7 @@ namespace FiddlerToPostman
 
                             foreach (HTTPHeaderItem httphi in session.RequestHeaders)
                             {
-                                request.headers += string.Format("{0}: {1}\n", httphi.Name, httphi.Value);
+                                request.headers += string.Format("{0}: {1}\\n", httphi.Name, httphi.Value);
 
                                 requestHeaderInfoList.Add(new RequestHeaderInfo() { key = httphi.Name, value = httphi.Value, enabled = true });
                             }

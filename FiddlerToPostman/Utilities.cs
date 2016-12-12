@@ -55,18 +55,18 @@ namespace FiddlerToPostman
                                 }
                                 else
                                 {
-                                    stringSegments.Add(string.Format("\"{0}\":\"{1}\"", propertyInfo.Name, propertyValue));
+                                    stringSegments.Add(string.Format("\"{0}\":\"{1}\"", propertyInfo.Name, propertyValue.ToString().Replace("\"", "\\\"")));
                                 }
                             }
                             else
                             {
                                 if (propertyInfo.PropertyType.IsClass)
                                 {
-                                    stringSegments.Add(ToJSONString(propertyValue));
+                                    stringSegments.Add(string.Format("\"{0}\":{1}", propertyInfo.Name, ToJSONString(propertyValue)));
                                 }
                                 else
                                 {
-                                    stringSegments.Add(string.Format("\"{0}\":{1}", propertyInfo.Name, propertyValue));
+                                    stringSegments.Add(string.Format("\"{0}\":{1}", propertyInfo.Name, propertyValue.ToString().ToLower()));
                                 }
                             }
                         }
