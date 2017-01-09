@@ -117,6 +117,7 @@ namespace FiddlerToPostman
                             responses.Add(response);
                             request.responses = responses.ToArray();
                             response = new Response();
+                            responses = new List<Response>();
 
                             requests.Add(request);
                             order.Add(request.id);
